@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: friend
+  profiles:
+    active: windows
+  redis:
+    host: 192.168.200.130
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
+  rabbitmq:
+    host: 192.168.200.130 # 主机名
+    port: 5672 # 端口
+    virtual-host: / # 虚拟主机
+    username: root # 用户名
+    password: root # 密码
+    listener:
+      simple:
+        prefetch: 1
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver #数据库驱动8.0
+      url: jdbc:mysql://localhost:3306/friend?useSSL=false&serverTimezone=Asia/Shanghai #数据库url,加后面的为了避免数据库跟后端交互时时间出问题
+      username: root #数据库账号
+      password: root #数据库密码
+  cloud:
+    alicloud: #oss存放文件图片,无需改动
+      access-key: LTAI5t8cLHMhC8T15KcjGTH6
+      secret-key: E0lZTAQEIB5iw2FlWy3hUlEWJly05f
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+        bucket: anoxia-root
+  mail: #发送邮件功能,无需改动
+    host: smtp.qq.com #不同的邮箱不一致，请自行百度查询
+    port: 587
+    username: 3102691553@qq.com
+    password: iffjrjdyaubzdfbf
+    nickname: 校园frind
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  security:
+    oauth2:
+      client:
+        registration:
+          gitee:
+            client-id: 2df221c079dd738a498cbd91286cd797c3331a0852458f03a6f961f0cbeff0cf
+            client-secret: f600e62da7d6b884d5e351d0e72f33f9e58370749d393d03f3cd619f0e60cb16
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/gitee
+            client-name: gitee
+            scope: user_info
+        provider:
+          gitee:
+            authorization-uri: https://gitee.com/oauth/authorize
+            token-uri: https://gitee.com/oauth/token
+            user-info-uri: https://gitee.com/api/v5/user
+            user-name-attribute: gitee
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #显示操作数据库的所有信息
+    map-underscore-to-camel-case: true
+  global-config: #注解配置类型
+    db-config:
+      id-type: ASSIGN_ID #雪花算法
+server:
+  port: 8080
+# Knife4j配置
+knife4j:
+  # 是否开启增强模式
+  enable: true
+aliyun: #自定义配置类,可以改动
+  oss:
+    module:
+      headportrait: headportraits
+      image: images
+      file: files
+      audio: audios
+      other: other

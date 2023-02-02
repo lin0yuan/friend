@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ayit.friend.mapper.MessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.ayit.friend.pojo.Message">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="fromId" column="from_id" jdbcType="BIGINT"/>
+            <result property="toId" column="to_id" jdbcType="BIGINT"/>
+            <result property="messageText" column="message_text" jdbcType="VARCHAR"/>
+            <result property="sentDatetime" column="sent_datetime" jdbcType="TIMESTAMP"/>
+            <result property="file" column="file" jdbcType="VARCHAR"/>
+            <result property="messageType" column="message_type" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,from_id,to_id,
+        message_text,sent_datetime,file,
+        message_type
+    </sql>
+</mapper>
